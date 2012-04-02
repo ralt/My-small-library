@@ -186,3 +186,8 @@ var xhr = {
 		}
 	}
 };
+
+// Cross-browser shims for small stuff
+if (Node.textContent === 'undefined') {
+  Node.textContent = Node.innerText
+}
