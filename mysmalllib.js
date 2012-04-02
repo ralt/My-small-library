@@ -80,6 +80,9 @@ var getElementsByClassName = function (className, tag, elm){
 // Pretty fast - http://jsperf.com/select-vs-natives-vs-jquery
 /*
   By, shortcuts for getting elements.
+  
+  Author: Raynos
+  Link: https://gist.github.com/1455456
 */
 var By = { 
     id: function (id) { return document.getElementById(id) }, 
