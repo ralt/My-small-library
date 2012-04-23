@@ -6,16 +6,16 @@ var MSL = {
     Author: Raynos
     Link: https://gist.github.com/1455456
     */
-    By: { 
-        id: function (id) { return document.getElementById(id) }, 
-        tag: function (tag, context) { 
+    By: {
+        id: function (id) { return document.getElementById(id) },
+        tag: function (tag, context) {
             return (context || document).getElementsByTagName(tag)
-        }, 
+        },
         "class": function (klass, context) {
             return (context || document).getElementsByClassName(klass)
         },
-        name: function (name) { return document.getElementsByName(name) }, 
-        qsa: function (query, context) { 
+        name: function (name) { return document.getElementsByName(name) },
+        qsa: function (query, context) {
             return (context || document).querySelectorAll(query)
         },
         qs: function (query, context) {
@@ -31,15 +31,18 @@ var MSL = {
         xmlhttp: (function() {
             var xmlhttp;
             try {
-            xmlhttp = new XMLHttpRequest();
-            } catch (e) {
+                xmlhttp = new XMLHttpRequest();
+            }
+            catch (e) {
                 try {
                     xmlhttp = new ActiveXObject('Msxml2.XMLHTTP');
-                } catch (er) {
+                }
+                catch (er) {
                     try {
-                    xmlhttp = new ActiveXObject('Microsoft.XMLHTTP');
-                    } catch (err) {
-                    xmlhttp = false;
+                        xmlhttp = new ActiveXObject('Microsoft.XMLHTTP');
+                    }
+                    catch (err) {
+                        xmlhttp = false;
                     }
                 }
             }
@@ -48,31 +51,32 @@ var MSL = {
         /* https://github.com/Titani/SO-ChatBot/blob/ccf6cfe827aee2af7b2832e48720a8e24a8feeed/source/bot.js#L110 */
         urlstringify: (function() {
             var simplies = {
-            'number': true,
-            'string': true,
-            'boolean': true
-            };
-            var singularStringify = function(thing) {
-            if (typeof thing in simplies) {
-                return encodeURIComponent(thing.toString());
-            }
-            return '';
-            };
-            var arrayStringify = function(array, keyName) {
-            keyName = singularStringify(keyName);
-            return array.map(function(thing) {
-                return keyName + '=' + singularStringify(thing);
-            });
+                'number': true,
+                'string': true,
+                'boolean': true
+            },
+            singularStringify = function(thing) {
+                if (typeof thing in simplies) {
+                    return encodeURIComponent(thing.toString());
+                }
+                return '';
+            },
+            arrayStringify = function(array, keyName) {
+                keyName = singularStringify(keyName);
+                return array.map(function(thing) {
+                    return keyName + '=' + singularStringify(thing);
+                });
             };
             return function(obj) {
-            return Object.keys(obj).map(function(key) {
-                var val = obj[key];
-                if (Array.isArray(val)) {
-                return arrayStringify(val, key);
-                } else {
-                return singularStringify(key) + '=' + singularStringify(val);
-                }
-            }).join('&');
+                return Object.keys(obj).map(function(key) {
+                    var val = obj[key];
+                    if (Array.isArray(val)) {
+                        return arrayStringify(val, key);
+                    }
+                    else {
+                        return singularStringify(key) + '=' + singularStringify(val);
+                    }
+                }).join('&');
             };
         }()),
         post: function(options) {
@@ -88,12 +92,12 @@ var MSL = {
             xhr.open(type, options.url, true);
             xhr.setRequestHeader('Content-Type', enctype);
             xhr.onreadystatechange = function() {
-                if (xhr.readyState == 4) {
-                if (xhr.status == 200) {
+                if (xhr.readyState === 4) {
+                if (xhr.status === 200) {
                     if ('success' in options && options.success.apply) {
                     options.success.apply(this, [xhr]);
                     }
-                } else if (xhr.status && xhr.status != 200) {
+                } else if (xhr.status && xhr.status !== 200) {
                     if ('failure' in options && options.failure.apply) {
                     options.failure.apply(this, [xhr]);
                     }
@@ -137,15 +141,15 @@ var MSL = {
         },
         read: function(name) {
             var nameEQ = name + '=',
-                ca = document.cookie.split(';')
+                ca = document.cookie.split(';'),
                 i,
                 c
             for (i = 0, l = ca.length; i < l; i++) {
                 c = ca[i]
-                while (c.charAt(0) == ' ') {
+                while (c.charAt(0) === ' ') {
                     c = c.substring(1, c.length)
                 }
-                if (c.indexOf(nameEQ) == 0) {
+                if (c.indexOf(nameEQ) === 0) {
                     return c.substring(nameEQ.length, c.length)
                 }
             }
