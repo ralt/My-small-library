@@ -8,16 +8,16 @@ Small description:
 1. The `By` object. Allows to easily select DOM elements. Usage example:
 
         (function($) {
-            var el = $.By.id('el-id')
-        }(MSL))
+            var el = $.By.id('el-id');
+        }(MSL));
 
 2. The `Little-XHR` object. Allows to easily make AJAX requests. Usage example:
 
         (function($) {
-            $.xhr.get(url: '/some-url', success: function(xhr) {
+            $.xhr.get({url: '/some-url', success: function(xhr) {
                 // Get the response with xhr.responseText
-            })
-        }(MSL))
+            }});
+        }(MSL));
 
 3. The `Cookie` object. Allows to easily handle cookies. Usage example:
 
@@ -25,7 +25,7 @@ Small description:
             if ($.Cookie.read('some-value')) {
                 // The cookie exists
             }
-        }(MSL))
+        }(MSL));
 
 Licenses and authors are in the non-minified file.
 
